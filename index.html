@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>分期付 APP 下载</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f5f7fa;
+    font-family: -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", "Microsoft YaHei",
+                 Arial, sans-serif;
+    color: #222;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 25px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 100%;
+    max-width: 430px;
+    background: #fff;
+    border-radius: 22px;
+    padding: 35px 24px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+/* APP图标 */
+.logo {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 18px;
+    border-radius: 20px;
+    background: #1677ff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: bold;
+}
+
+h1 {
+    margin: 0 0 10px;
+    font-size: 28px;
+}
+
+.version {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* 微信提示 */
+.wechat-tip {
+    display: none;
+    background: #fff7e6;
+    border: 1px solid #ffd591;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.wechat-tip-title {
+    font-size: 17px;
+    font-weight: bold;
+    color: #d46b08;
+    margin-bottom: 8px;
+}
+
+.wechat-tip-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #666;
+}
+
+/* 下载按钮 */
+.download {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    background: #1677ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 13px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.download:active {
+    opacity: 0.8;
+}
+
+/* 微信环境按钮 */
+.browser-button {
+    display: none;
+    width: 100%;
+    padding: 15px;
+    background: #07c160;
+    color: white;
+    border-radius: 13px;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+/* 普通提示 */
+.normal-tip {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f5f7fa;
+    border-radius: 12px;
+    color: #777;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.footer {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 13px;
+    color: #999;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="logo">
+            分
+        </div>
+
+        <h1>分期付 APP</h1>
+
+        <div class="version">
+            Android 安卓版 · v1.0.0
+        </div>
+
+        <!-- 微信环境提示 -->
+        <div class="wechat-tip" id="wechatTip">
+
+            <div class="wechat-tip-title">
+                微信内暂不支持直接安装
+            </div>
+
+            <div class="wechat-tip-text">
+                请点击微信右上角
+                <b>“···”</b>
+                <br>
+                然后选择
+                <b>“在浏览器中打开”</b>
+                <br>
+                再进行 APP 下载和安装。
+            </div>
+
+        </div>
+
+        <!-- 浏览器打开提示 -->
+        <div class="browser-button" id="browserTip">
+            请点击右上角 ··· 在浏览器中打开
+        </div>
+
+        <!-- 下载 -->
+        <a class="download"
+           href="download.html"
+           id="downloadButton">
+            立即下载 APP
+        </a>
+
+        <div class="normal-tip">
+            仅支持 Android 安卓手机
+            <br>
+            下载后按照手机提示完成安装
+        </div>
+
+        <div class="footer">
+            分期付 APP<br>
+            Android 应用程序
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* 判断是否在微信中 */
+var ua = navigator.userAgent.toLowerCase();
+
+var isWeChat = ua.indexOf("micromessenger") !== -1;
+
+if (isWeChat) {
+
+    /* 显示微信提示 */
+    document.getElementById("wechatTip").style.display = "block";
+
+    document.getElementById("browserTip").style.display = "block";
+
+    /*
+     * 微信中不直接执行APK下载，
+     * 用户需要先使用浏览器打开。
+     */
+    document.getElementById("downloadButton").onclick = function(e) {
+
+        e.preventDefault();
+
+        alert(
+            "请先点击微信右上角“···”，\n" +
+            "选择“在浏览器中打开”，\n" +
+            "然后再进行下载。"
+        );
+
+    };
+
+}
+
+</script>
+
+</body>
+</html>
